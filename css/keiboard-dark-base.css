@@ -1,0 +1,14 @@
+keiboard-container {
+	position: absolute;
+	height: 45%;
+	bottom:0px;
+	width:100%;
+	overflow:hidden;
+	z-index:-9999;
+	opacity: 0;
+}
+
+keiboard-container[data-keiboard-is-visible="true"] {
+	z-index:9998;
+	opacity: 1;
+}

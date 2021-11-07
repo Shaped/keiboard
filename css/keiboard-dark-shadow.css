@@ -1,0 +1,54 @@
+div.keiboard-container {
+	position: relative;
+	height: 100%;
+	opacity: 0;
+	bottom: -210px;
+	transition: bottom 0.3s, opacity 0.3s;
+	background-color: rgba(9,12,16,1);
+	border-top:4px solid rgba(44,46,62,1);
+}
+
+div.keiboard-container[data-keiboard-is-visible="false"] {
+	opacity: 0;
+	bottom: -210px;
+}
+
+div.keiboard-container[data-keiboard-is-visible="true"] {
+	border-top:4px solid rgba(60,64,90,1);
+	opacity: 1;
+	bottom: 0px;
+}
+
+div.keypad_numpadAreaContainer {
+	height:100%;
+	width: 25%;
+	margin: 0 auto;
+	padding-top:4px;
+}
+
+div.keypad_numpadContainer > * {
+	margin: 6px 0 0 6px;
+}
+
+div.keypad_numpadContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr;
+	grid-gap:4px;
+	height: calc(100% - 16px);
+}
+
+div.keypad_numpadContainer button {
+	width: 100%;
+	height: 100%;
+	margin:0;
+	background-color: rgb(66,72,86);
+	color: rgb(255,255,255);
+	font-weight: bold;
+	border: none;
+	border-radius:0.75em;
+}
+
+div.keypad_numpadContainer button:active {
+	background-color:red;
+}
