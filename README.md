@@ -15,7 +15,9 @@ var keiboardOptions = {
   inputClass: null,     // restricts keiboard to showing up only when elements of this class are focussed
   theme: 'dark',        // keiboard theme, dark is only working at the moment
   displaySpecialKeys: false,   // whether to display keys like alt, meta, control, etc..
-  singleKeySpread: true        // determines whether or not to add an additional class to each key button (allowing the key to have a minimum-width and 'spread-out')
+  qwertyShowNumbers: true,     // whether or not to show the top row of numbers on the qwerty layout
+  singleKeySpread: true,       // determines whether or not to add an additional class to each key button (allowing the key to have a minimum-width and 'spread-out')
+  shiftSingle: true            // whether or not to return to lower-case after pressing a key on upper-case (ie: does shift act like a capslock?)
 };
 
 var keiboard = new Keiboard(keiboardOptions);
@@ -33,8 +35,14 @@ Example:
 <input type="text" data-keiboard-type="numeric" />
 ```
 
+If you want to have just a numeric keyboard on a certain element:
+
+```
+<input type="text" data-keiboard-type="numeric" data-keiboard-fixed="true" />
+```
+
+
 TODO:
-- make shift button work
 - make light theme work
 - make both themes better
 - make tests, examples
