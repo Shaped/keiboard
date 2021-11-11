@@ -38,7 +38,7 @@ div.keypad_numpadContainer > * {
 div.keypad_numpadContainer {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 1fr;
 	grid-gap:4px;
 	height: calc(100% - 16px);
 }
@@ -58,21 +58,22 @@ div.keypad_numpadContainer button:active {
 	background-color:red;
 }
 
+div.keypad_numpadContainer button.keiboard_key_ToggleNumeric {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
 div.keypad_qwertyAreaContainer {
 	height:100%;
-	width: 75%;
+	width: 80%;
 	margin: 0 auto;
 	padding-top:4px;
 }
 
-div.keypad_qwertyContainer > * {
-	margin: 6px 0 0 6px;
-}
-
 div.keypad_qwertyContainer {
 	display: grid;
-	grid-gap:4px;
 	height: calc(100% - 16px);
+	grid-gap: 4px;
 }
 
 div.keypad_qwertyContainer div {
@@ -81,7 +82,7 @@ div.keypad_qwertyContainer div {
 }
 
 div.keypad_qwertyContainer div > button.keiboard_keysingle {
-	max-width: 2.75em;
+	max-width: 3em;
 }
 
 div.keypad_qwertyContainer div > button.keiboard_keybar {
@@ -89,7 +90,7 @@ div.keypad_qwertyContainer div > button.keiboard_keybar {
 }
 
 div.keypad_qwertyContainer div > button {
-	min-width: 2.5em;
+	min-width: 2.75em;
 	height: 100%;
 	margin:0;
 	background-color: rgb(66,72,86);
@@ -103,4 +104,13 @@ div.keypad_qwertyContainer div > button {
 
 div.keypad_qwertyContainer button:active {
 	background-color:red;
+}
+
+div.keypad_qwertyContainer button.keiboard_key_Shift {
+	width: 4em;
+}
+
+div.keypad_qwertyContainer button.keiboard_key_Backspace,
+div.keypad_qwertyContainer button.keiboard_key_Enter {
+	width: 5em;
 }

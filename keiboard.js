@@ -9,6 +9,7 @@ class Keiboard {
 		  inputClass = null,
 		  theme = 'dark',
 		  displaySpecialKeys = false,
+		  qwertyShowNumbers = true,
 		  singleKeySpread = true
 		} = {}) {
 
@@ -16,6 +17,7 @@ class Keiboard {
 			inputClass:inputClass,
 			theme:theme,
 			displaySpecialKeys: displaySpecialKeys,
+			qwertyShowNumbers: qwertyShowNumbers,
 			singleKeySpread: singleKeySpread
 		};
 
@@ -163,7 +165,7 @@ class Keiboard {
 					keyCode: "Delete"
 				},
 				keyLower:{
-					label: "<--",
+					label: "BKSP",
 					keyCode: "Backspace"
 				},
 			}
@@ -172,9 +174,11 @@ class Keiboard {
 			[
 			{
 				keyUpper:{
-					label: "SHIFT+TAB",
+					//label: "SHIFT+TAB",
+					label: "TAB",
 					keyCode: "Tab",
-					keyModifier: "Shift"
+					keyModifier: "Shift",
+					keyIsSpecial: true					
 				},
 				keyLower:{
 					label: "TAB",
@@ -446,7 +450,8 @@ class Keiboard {
 			},
 			{
 				keyUpper: {
-					label: "SHIFT+Enter",
+					//label: "SHIFT+Enter",
+					label: "Enter",
 					keyCode: "Enter",
 					keyModifier: "Shift"
 				},
@@ -647,6 +652,503 @@ class Keiboard {
 			]
 		];
 
+		this.qwertyKeysNoNumbers = [ // Generic QWERTY 'US' Keyboard Layout without Numbers
+			// TAB|QWERTYUIOP[]\
+			[
+			{
+				keyUpper:{
+					//label: "SHIFT+TAB",
+					label: "TAB",
+					keyCode: "Tab",
+					keyIsSpecial: true,
+					keyModifier: "Shift"
+				},
+				keyLower:{
+					label: "TAB",
+					keyCode: "Tab",
+					keyIsSpecial: true
+				}
+			},
+			{
+				keyUpper: {
+					label: "Q",
+					keyCode: "Q"
+				},
+				keyLower:{
+					label: "q",
+					keyCode: "q"
+				}
+			},
+			{
+				keyUpper: {
+					label: "W",
+					keyCode: "W"
+				},
+				keyLower:{
+					label: "w",
+					keyCode: "w"
+				}
+			},
+			{
+				keyUpper: {
+					label: "E",
+					keyCode: "E"
+				},
+				keyLower:{
+					label: "e",
+					keyCode: "e"
+				}
+			},
+			{
+				keyUpper: {
+					label: "R",
+					keyCode: "R"
+				},
+				keyLower:{
+					label: "r",
+					keyCode: "r"
+				}
+			},
+			{
+				keyUpper: {
+					label: "T",
+					keyCode: "T"
+				},
+				keyLower:{
+					label: "t",
+					keyCode: "t"
+				}
+			},
+			{
+				keyUpper: {
+					label: "Y",
+					keyCode: "Y"
+				},
+				keyLower:{
+					label: "y",
+					keyCode: "y"
+				}
+			},
+			{
+				keyUpper: {
+					label: "U",
+					keyCode: "U"
+				},
+				keyLower:{
+					label: "u",
+					keyCode: "u"
+				}
+			},
+			{
+				keyUpper: {
+					label: "I",
+					keyCode: "I"
+				},
+				keyLower:{
+					label: "i",
+					keyCode: "i"
+				}
+			},
+			{
+				keyUpper: {
+					label: "I",
+					keyCode: "I"
+				},
+				keyLower:{
+					label: "i",
+					keyCode: "i"
+				}
+			},
+			{
+				keyUpper: {
+					label: "O",
+					keyCode: "O"
+				},
+				keyLower:{
+					label: "o",
+					keyCode: "o"
+				}
+			},
+			{
+				keyUpper: {
+					label: "P",
+					keyCode: "P"
+				},
+				keyLower:{
+					label: "p",
+					keyCode: "p"
+				}
+			},
+			{
+				keyUpper: {
+					label: "{",
+					keyCode: "{"
+				},
+				keyLower:{
+					label: "[",
+					keyCode: "["
+				},
+			},
+			{
+				keyUpper: {
+					label: "}",
+					keyCode: "}"
+				},
+				keyLower:{
+					label: "]",
+					keyCode: "]"
+				},
+			},
+			{
+				keyUpper: {
+					name: "Backslash",
+					label: "\\",
+					keyCode: "\\"
+				},
+				keyLower:{
+					name: "Pipe",
+					label: "|",
+					keyCode: "|"
+				},
+			},
+			{
+				keyLower:{
+					label: "BKSP",
+					keyCode: "Backspace"
+				},
+			}			
+			],
+			[ // CAPS|ASDFGHJKL;'|ENTER
+			{
+				keyLower:{
+					label: "CAPS",
+					keyCode: "CapsLock",
+					keyIsSpecial: true,
+					keyIsToggle: true
+				}
+			},
+			{
+				keyUpper: {
+					label: "A",
+					keyCode: "A"
+				},
+				keyLower:{
+					label: "a",
+					keyCode: "a"
+				}
+			},
+			{
+				keyUpper: {
+					label: "S",
+					keyCode: "S"
+				},
+				keyLower:{
+					label: "s",
+					keyCode: "s"
+				}
+			},
+			{
+				keyUpper: {
+					label: "D",
+					keyCode: "D"
+				},
+				keyLower:{
+					label: "d",
+					keyCode: "d"
+				}
+			},
+			{
+				keyUpper: {
+					label: "F",
+					keyCode: "F"
+				},
+				keyLower:{
+					label: "f",
+					keyCode: "f"
+				}
+			},
+			{
+				keyUpper: {
+					label: "G",
+					keyCode: "G"
+				},
+				keyLower:{
+					label: "g",
+					keyCode: "g"
+				}
+			},
+			{
+				keyUpper: {
+					label: "H",
+					keyCode: "H"
+				},
+				keyLower:{
+					label: "h",
+					keyCode: "h"
+				}
+			},
+			{
+				keyUpper: {
+					label: "J",
+					keyCode: "J"
+				},
+				keyLower:{
+					label: "j",
+					keyCode: "j"
+				}
+			},
+			{
+				keyUpper: {
+					label: "K",
+					keyCode: "K"
+				},
+				keyLower:{
+					label: "k",
+					keyCode: "k"
+				}
+			},
+			{
+				keyUpper: {
+					label: "L",
+					keyCode: "L"
+				},
+				keyLower:{
+					label: "l",
+					keyCode: "l"
+				}
+			},
+			{
+				keyUpper: {
+					label: ":",
+					keyCode: ":"
+				},
+				keyLower:{
+					label: ";",
+					keyCode: ";"
+				}
+			},
+			{
+				keyUpper: {
+					label: "\"",
+					keyCode: "\""
+				},
+				keyLower:{
+					label: "'",
+					keyCode: "'"
+				}
+			},
+			{
+				keyUpper: {
+					//label: "SHIFT+Enter",
+					label: "Enter",
+					keyCode: "Enter",
+					keyModifier: "Shift"
+				},
+				keyLower:{
+					label: "Enter",
+					keyCode: "Enter"
+				},
+			}
+			],
+			[ // SHIFT|ZXCVBNM,./|SHIFT
+			{
+				keyUpper: {
+					label: "Z",
+					keyCode: "Z"
+				},
+				keyLower:{
+					label: "z",
+					keyCode: "z"
+				}
+			},
+			{
+				keyUpper: {
+					label: "X",
+					keyCode: "X"
+				},
+				keyLower:{
+					label: "x",
+					keyCode: "x"
+				}
+			},
+			{
+				keyUpper: {
+					label: "C",
+					keyCode: "C"
+				},
+				keyLower:{
+					label: "c",
+					keyCode: "c"
+				}
+			},
+			{
+				keyUpper: {
+					label: "V",
+					keyCode: "V"
+				},
+				keyLower:{
+					label: "v",
+					keyCode: "v"
+				}
+			},
+			{
+				keyUpper: {
+					label: "B",
+					keyCode: "B"
+				},
+				keyLower:{
+					label: "b",
+					keyCode: "b"
+				}
+			},
+			{
+				keyUpper: {
+					label: "N",
+					keyCode: "N"
+				},
+				keyLower:{
+					label: "n",
+					keyCode: "n"
+				}
+			},
+			{
+				keyUpper: {
+					label: "M",
+					keyCode: "M"
+				},
+				keyLower:{
+					label: "m",
+					keyCode: "m"
+				}
+			},
+			{
+				keyUpper: {
+					label: "<",
+					keyCode: "<"
+				},
+				keyLower:{
+					label: ",",
+					keyCode: ","
+				}
+			},
+			{
+				keyUpper: {
+					label: ">",
+					keyCode: ">"
+				},
+				keyLower:{
+					label: ".",
+					keyCode: "."
+				}
+			},
+			{
+				keyUpper: {
+					label: "?",
+					keyCode: "?"
+				},
+				keyLower:{
+					label: "/",
+					keyCode: "/"
+				}
+			}
+			],
+			[ // CTRL|META|ALT|SPACE|ALT|META|CONTEXTMENU|CTRL
+			{
+				keyLower: {
+					label: "CTRL",
+					keyCode: "Control",
+					keyCodeAlt: "ControlLeft",
+					keyIsModifier: true,
+					keyIsSpecial: true
+				}
+			},
+			{
+				keyLower: {
+					label: "META",
+					keyCode: "Meta",
+					keyCodeAlt: "MetaLeft",
+					keyIsSpecial: true,
+				}
+			},
+			{
+				keyLower: {
+					label: "Alt",
+					keyCode: "Alt",
+					keyCodeAlt: "AltLeft",
+					keyIsModifier: true,
+					keyIsSpecial: true
+				}
+			},
+			{
+				keyLower:{
+					label: "Shift",
+					keyCode: "Shift",
+					keyCodeAlt: "LeftShift",
+					keyIsModifier: true,
+//					keyIsSpecial: true,
+					keyIsToggle: true
+				}
+			},			
+			{
+				keyLower: {
+					label: "Space",
+					keyCode: " ",
+					keyCodeAlt: "Space",
+					keyIsBar: true
+				}
+			},
+			{
+				keyLower: {
+					label: "NumPad",
+					keyCode: "ToggleNumeric"
+				}
+			},
+			{
+				keyLower:{
+					label: "Shift",
+					keyCode: "Shift",
+					keyCodeAlt: "RightShift",
+					keyIsModifier: true,
+//					keyIsSpecial: true,
+					keyIsToggle: true
+				}
+			},			
+			{
+				keyLower: {
+					label: "Alt",
+					keyCode: "Alt",
+					keyCodeAlt: "AltRight",
+					keyIsModifier: true,
+					keyIsSpecial: true
+				}
+			},
+			{
+				keyLower: {
+					label: "META",
+					keyCode: "Meta",
+					keyCodeAlt: "MetaRight",
+					keyIsSpecial: true
+				}
+			},
+			{
+				keyLower: {
+					label: "CONTEXT",
+					keyCode: "ContextMenu",
+					keyIsSpecial: true
+				}
+			},
+			{
+				keyLower: {
+					label: "CTRL",
+					keyCode: "Control",
+					keyCodeAlt: "ControlRight",
+					keyIsModifier: true,
+					keyIsSpecial: true
+				}
+			}			
+			]
+		];		
+
 		this.enabled = false;
 		this.isVisible = false;
 
@@ -725,22 +1227,30 @@ class Keiboard {
 		this.keiboardContainer.setAttribute('data-keiboard-is-visible', true);
 		this.keiboardContainer.keiboardContainerDiv.setAttribute('data-keiboard-is-visible', true);
 
+		this.target = target;
+
 		switch(target.getAttribute('data-keiboard-type')) {
 			case 'numeric':
-				console.log("target is numeric");
-				this.showNumericKeyboard(target);
+				this.showNumericKeyboard();
 			  break;
 			case 'qwerty':
 			case null:
 			default:
-				console.log("target is qwerty or not known");
-				this.showQwertyKeyboard(target);
+				this.showQwertyKeyboard();
 
 		}
 	}
 
-	showQwertyKeyboard(target) {
-		this.keiboardContainer.keiboardQwerty.target = target;
+	toggleType() {
+		if (this.keiboardContainer.keiboardQwerty.attributes['data-keiboard-is-visible'].value == 'true') {
+			this.showNumericKeyboard();
+		} else {
+			this.showQwertyKeyboard();
+		}
+	}
+
+	showQwertyKeyboard() {
+		this.keiboardContainer.keiboardQwerty.target = this.target;
 
 		this.keiboardContainer.keiboardQwerty.setAttribute('data-keiboard-is-visible', true);
 		this.keiboardContainer.keiboardNumeric.setAttribute('data-keiboard-is-visible', false);
@@ -748,8 +1258,8 @@ class Keiboard {
 		this.isVisible = true;
 	}
 
-	showNumericKeyboard(target) {
-		this.keiboardContainer.keiboardNumeric.target = target;
+	showNumericKeyboard() {
+		this.keiboardContainer.keiboardNumeric.target = this.target;
 
 		this.keiboardContainer.keiboardNumeric.setAttribute('data-keiboard-is-visible', true);
 		this.keiboardContainer.keiboardQwerty.setAttribute('data-keiboard-is-visible', false);
@@ -828,10 +1338,13 @@ class KeiboardElementClass extends HTMLElement {
 		ev.preventDefault();
 
 		var startPos = this.target.selectionStart;
-		var endPos = this.target.selectionEnd;;
+		var endPos = this.target.selectionEnd;
 
 		if (this.target != null) {
 			switch(ev.currentTarget.value) {
+				case "ToggleNumeric":
+					this.parent.toggleType();
+				  break;
 				case "Enter":
 					let enterKey = {
 						view: window,
@@ -906,7 +1419,7 @@ class KeiboardElementClass extends HTMLElement {
 						});
 					}
 
-					console.log("TODO: Show UpperCase");
+					this.toggleKeyCase();
 				  break;
 				case "Backspace":
 				case "Delete":
@@ -1051,6 +1564,11 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 			label: 'OK'
 		});
 
+		numpadKeys.push({
+			keyCode: 'ToggleNumeric',
+			label: 'ABC'
+		});
+
 		numpadKeys.forEach((el, i) => {
 			let key = document.createElement('button');
 
@@ -1074,6 +1592,8 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 
 		this.target = null;
 
+		this.currentCase = "lower";
+
 		// NOTE: this might need toLower on non xhtml5 (regular html5) pages!!
 		this.template = document.getElementById(this.nodeName).cloneNode(true);
 
@@ -1083,45 +1603,103 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 		
 		return this;
 	}
-	connectedCallback() {
-		var qwertyContainer = this.shadow.querySelector('.keypad_qwertyContainer');
+	makeKeys(keyboard, container, keyCase) {
+		this.currentCase = keyCase;
 
-		var qwertyKeys = this.parent.qwertyKeys;
-
-		qwertyKeys.forEach((row, i) => {
+		keyboard.forEach((row, i) => {
 			let keyRow = document.createElement('div');
 
 			row.forEach((key,i) => {
-				if (!(key.keyLower.keyIsSpecial == true
-				    &&
-				    !this.parent.options.displaySpecialKeys)
-				&& !key.keyLower.keyIsHidden) {
-					let keyEl = document.createElement('button');
+				if (keyCase == "lower"
+				||  typeof key.keyUpper === 'undefined') {
+					if (!(key.keyLower.keyIsSpecial == true
+					    &&
+					    !this.parent.options.displaySpecialKeys)
+					&& !key.keyLower.keyIsHidden) {
+						let keyEl = document.createElement('button');
 
-					if (key.keyLower.keyIsBar) {
-						keyEl.classList.add('keiboard_keybar');
-					} else
-					if (key.keyLower.label.length == 1
-					&& !this.parent.options.singleKeySpread) {
-						keyEl.classList.add('keiboard_keysingle');
+						if (key.keyLower.keyIsBar) {
+							keyEl.classList.add('keiboard_keybar');
+						} else
+						if (key.keyLower.label.length == 1
+						&& !this.parent.options.singleKeySpread) {
+							keyEl.classList.add('keiboard_keysingle');
+						}
+
+						keyEl.addEventListener('mousedown', this.handleKeypress.bind(this));
+
+						if (key.keyLower.keyCodeAlt) 
+							keyEl.classList.add("keiboard_key_"+key.keyLower.keyCodeAlt);
+						else
+							keyEl.classList.add("keiboard_key_"+key.keyLower.keyCode);
+
+						keyEl.textContent = key.keyLower.label;
+						keyEl.value = key.keyLower.keyCode;
+
+						keyRow.appendChild(keyEl);
 					}
+				} else {
+					if (!(key.keyUpper.keyIsSpecial == true
+					    &&
+					    !this.parent.options.displaySpecialKeys)
+					&& !key.keyUpper.keyIsHidden) {
+						let keyEl = document.createElement('button');
 
-					keyEl.addEventListener('mousedown', this.handleKeypress.bind(this));
+						if (key.keyUpper.keyIsBar) {
+							keyEl.classList.add('keiboard_keybar');
+						} else
+						if (key.keyUpper.label.length == 1
+						&& !this.parent.options.singleKeySpread) {
+							keyEl.classList.add('keiboard_keysingle');
+						}
 
-					if (key.keyLower.keyCodeAlt) 
-						keyEl.classList.add("keiboard_key_"+key.keyLower.keyCodeAlt);
-					else
-						keyEl.classList.add("keiboard_key_"+key.keyLower.keyCode);
+						keyEl.addEventListener('mousedown', this.handleKeypress.bind(this));
 
-					keyEl.textContent = key.keyLower.label;
-					keyEl.value = key.keyLower.keyCode;
+						if (key.keyUpper.keyCodeAlt) 
+							keyEl.classList.add("keiboard_key_"+key.keyUpper.keyCodeAlt);
+						else
+							keyEl.classList.add("keiboard_key_"+key.keyUpper.keyCode);
 
-					keyRow.appendChild(keyEl);
+						keyEl.textContent = key.keyUpper.label;
+						keyEl.value = key.keyUpper.keyCode;
+
+						keyRow.appendChild(keyEl);
+					}					
 				}
 			});
 
-			qwertyContainer.appendChild(keyRow);
+			container.appendChild(keyRow);
 		});
+	}
+	toggleKeyCase() {
+		var qwertyContainer = this.shadow.querySelector('.keypad_qwertyContainer');
+
+		qwertyContainer.innerHTML = "";
+
+		var newCase = "lower";
+
+		if (this.parent.options.qwertyShowNumbers)
+			var qwertyKeys = this.parent.qwertyKeys;
+		else 
+			var qwertyKeys = this.parent.qwertyKeysNoNumbers;
+
+		if (this.currentCase == "lower") {
+			newCase = "upper";
+		} else {
+			newCase = "lower";
+		}
+
+		this.makeKeys(qwertyKeys, qwertyContainer, newCase);
+	}
+	connectedCallback() {
+		var qwertyContainer = this.shadow.querySelector('.keypad_qwertyContainer');
+
+		if (this.parent.options.qwertyShowNumbers)
+			var qwertyKeys = this.parent.qwertyKeys;
+		else 
+			var qwertyKeys = this.parent.qwertyKeysNoNumbers;
+
+		this.makeKeys(qwertyKeys, qwertyContainer, 'lower');
 	}
 }
 
