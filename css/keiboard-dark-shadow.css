@@ -19,6 +19,11 @@ div.keiboard-container[data-keiboard-is-visible="true"] {
 	bottom: 0px;
 }
 
+keiboard-qwerty[data-keiboard-is-visible="false"],
+keiboard-numeric[data-keiboard-is-visible="false"] {
+	display:none;
+}
+
 div.keypad_numpadAreaContainer {
 	height:100%;
 	width: 25%;
@@ -50,5 +55,52 @@ div.keypad_numpadContainer button {
 }
 
 div.keypad_numpadContainer button:active {
+	background-color:red;
+}
+
+div.keypad_qwertyAreaContainer {
+	height:100%;
+	width: 75%;
+	margin: 0 auto;
+	padding-top:4px;
+}
+
+div.keypad_qwertyContainer > * {
+	margin: 6px 0 0 6px;
+}
+
+div.keypad_qwertyContainer {
+	display: grid;
+	grid-gap:4px;
+	height: calc(100% - 16px);
+}
+
+div.keypad_qwertyContainer div {
+	display: flex;
+	justify-content: center;
+}
+
+div.keypad_qwertyContainer div > button.keiboard_keysingle {
+	max-width: 2.75em;
+}
+
+div.keypad_qwertyContainer div > button.keiboard_keybar {
+	width: 15em;
+}
+
+div.keypad_qwertyContainer div > button {
+	min-width: 2.5em;
+	height: 100%;
+	margin:0;
+	background-color: rgb(66,72,86);
+	color: rgb(255,255,255);
+	font-weight: bold;
+	border: none;
+	border-radius:0.75em;
+	margin-left:3px;
+	margin-right:3px;
+}
+
+div.keypad_qwertyContainer button:active {
 	background-color:red;
 }
