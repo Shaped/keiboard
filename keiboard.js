@@ -10,7 +10,8 @@ class Keiboard {
 		  theme = 'dark',
 		  displaySpecialKeys = false,
 		  qwertyShowNumbers = true,
-		  singleKeySpread = true
+		  singleKeySpread = true,
+		  shiftSingle = true
 		} = {}) {
 
 		this.options = {
@@ -18,7 +19,8 @@ class Keiboard {
 			theme:theme,
 			displaySpecialKeys: displaySpecialKeys,
 			qwertyShowNumbers: qwertyShowNumbers,
-			singleKeySpread: singleKeySpread
+			singleKeySpread: singleKeySpread,
+			shiftSingle: shiftSingle
 		};
 
 		this.themes = {
@@ -33,6 +35,35 @@ class Keiboard {
 				templateURI		: '/js/lib/keiboard/templates/keiboard-dark.html'
 			}
 		}
+
+		this.numpadKeys = [];
+
+		for (let x = 1;x < 10; x++) { //todo: split numpad into rows like qwerty
+			this.numpadKeys.push({
+				keyCode : parseInt(x),
+				label : `${x}`
+			});
+		}
+
+		this.numpadKeys.push({
+			keyCode: 'Delete',
+			label: 'DEL'
+		});
+
+		this.numpadKeys.push({
+			keyCode: 0,
+			label: '0'
+		});
+
+		this.numpadKeys.push({
+			keyCode: 'Enter',
+			label: 'OK'
+		});
+
+		this.numpadKeys.push({
+			keyCode: 'ToggleNumeric',
+			label: 'ABC'
+		});
 
 		this.qwertyKeys = [ // Generic QWERTY 'US' Keyboard Layout
 			[
@@ -1229,6 +1260,7 @@ class Keiboard {
 
 		this.target = target;
 
+
 		switch(target.getAttribute('data-keiboard-type')) {
 			case 'numeric':
 				this.showNumericKeyboard();
@@ -1237,7 +1269,6 @@ class Keiboard {
 			case null:
 			default:
 				this.showQwertyKeyboard();
-
 		}
 	}
 
@@ -1252,6 +1283,8 @@ class Keiboard {
 	showQwertyKeyboard() {
 		this.keiboardContainer.keiboardQwerty.target = this.target;
 
+		this.keiboardContainer.keiboardNumeric.makeKeys(this.numpadKeys);
+
 		this.keiboardContainer.keiboardQwerty.setAttribute('data-keiboard-is-visible', true);
 		this.keiboardContainer.keiboardNumeric.setAttribute('data-keiboard-is-visible', false);
 
@@ -1260,6 +1293,8 @@ class Keiboard {
 
 	showNumericKeyboard() {
 		this.keiboardContainer.keiboardNumeric.target = this.target;
+
+		this.keiboardContainer.keiboardNumeric.makeKeys(this.numpadKeys);
 
 		this.keiboardContainer.keiboardNumeric.setAttribute('data-keiboard-is-visible', true);
 		this.keiboardContainer.keiboardQwerty.setAttribute('data-keiboard-is-visible', false);
@@ -1502,6 +1537,27 @@ class KeiboardElementClass extends HTMLElement {
 					}
 				  break;
 				default:
+					if (this.shiftIsDown && this.parent.options.shiftSingle) {
+						let shiftKey = {
+							view: window,
+							bubbles: true,
+							cancelable: true,
+							key: 'Shift',
+							code: 'ShiftLeft', //compat
+							charCode: 0,  //compat
+							keyCode: 16    //compat
+						};
+
+
+						let shiftUp = new KeyboardEvent('keyup', shiftKey);
+
+						this.toggleKeyCase();
+
+						setTimeout(()=>{
+							this.shiftIsDown = false;
+							this.target.dispatchEvent(shiftUp);
+						});
+					}
 					// TODO: can we, even if 'untrusted', fake keypress/up/down events for all keys?
 					if (this.target.selectionStart == 0
 					&& this.target.selectionEnd == 0
@@ -1526,8 +1582,6 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 		super(...args);
 		this.self = self;
 
-		this.target = null;
-
 		// NOTE: this might need toLower on non xhtml5 (regular html5) pages!!
 		this.template = document.getElementById(this.nodeName).cloneNode(true);
 
@@ -1537,50 +1591,34 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 		
 		return this;
 	}
-	connectedCallback() {
-		var numpadContainer = this.shadow.querySelector('.keypad_numpadContainer');
-
-		var numpadKeys = [];
-
-		for (let x = 1;x < 10; x++) {
-			numpadKeys.push({
-				keyCode : parseInt(x),
-				label : `${x}`
-			});
-		}
-
-		numpadKeys.push({
-			keyCode: 'Delete',
-			label: 'DEL'
-		});
-
-		numpadKeys.push({
-			keyCode: 0,
-			label: '0'
-		});
-
-		numpadKeys.push({
-			keyCode: 'Enter',
-			label: 'OK'
-		});
-
-		numpadKeys.push({
-			keyCode: 'ToggleNumeric',
-			label: 'ABC'
-		});
-
-		numpadKeys.forEach((el, i) => {
+	makeKeys(keyboard) {
+		console.log("numericMAkeKeys")
+		this.container.innerHTML="";
+		keyboard.forEach((el, i) => {
 			let key = document.createElement('button');
 
 			key.addEventListener('mousedown', this.handleKeypress.bind(this));
 
 			key.textContent = el.label;
 			key.value = el.keyCode;
-
+			
 			key.classList.add("keiboard_key_"+el.keyCode);
 
-			numpadContainer.appendChild(key);
-		});
+			if (!(
+				typeof this.parent.target !== 'undefined'
+				&& this.parent.target.attributes['data-keiboard-fixed']
+				&& key.value == "ToggleNumeric" 
+			)) {
+				this.container.appendChild(key);
+			} else {
+				console.log('hidding '+key.value)
+			}
+		});		
+	}
+	connectedCallback() {
+		this.container = this.shadow.querySelector('.keypad_numpadContainer');
+
+		this.makeKeys(this.parent.numpadKeys);
 	}
 
 }
@@ -1589,8 +1627,6 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 	constructor(...args) {
 		super(...args);
 		this.self = self;
-
-		this.target = null;
 
 		this.currentCase = "lower";
 
@@ -1603,7 +1639,7 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 		
 		return this;
 	}
-	makeKeys(keyboard, container, keyCase) {
+	makeKeys(keyboard, keyCase) {
 		this.currentCase = keyCase;
 
 		keyboard.forEach((row, i) => {
@@ -1668,13 +1704,13 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 				}
 			});
 
-			container.appendChild(keyRow);
+			this.container.appendChild(keyRow);
 		});
 	}
 	toggleKeyCase() {
-		var qwertyContainer = this.shadow.querySelector('.keypad_qwertyContainer');
+		this.container = this.shadow.querySelector('.keypad_qwertyContainer');
 
-		qwertyContainer.innerHTML = "";
+		this.container.innerHTML = "";
 
 		var newCase = "lower";
 
@@ -1689,17 +1725,17 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 			newCase = "lower";
 		}
 
-		this.makeKeys(qwertyKeys, qwertyContainer, newCase);
+		this.makeKeys(qwertyKeys, newCase);
 	}
 	connectedCallback() {
-		var qwertyContainer = this.shadow.querySelector('.keypad_qwertyContainer');
+		this.container = this.shadow.querySelector('.keypad_qwertyContainer');
 
 		if (this.parent.options.qwertyShowNumbers)
 			var qwertyKeys = this.parent.qwertyKeys;
 		else 
 			var qwertyKeys = this.parent.qwertyKeysNoNumbers;
 
-		this.makeKeys(qwertyKeys, qwertyContainer, 'lower');
+		this.makeKeys(qwertyKeys, 'lower');
 	}
 }
 
