@@ -1576,7 +1576,7 @@ class KeiboardElementClass extends HTMLElement {
 					}
 			}
 		}
-	}	
+	}
 }
 
 class KeiboardNumpadElementClass extends KeiboardElementClass {
@@ -1589,13 +1589,12 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 		this.template = document.getElementById(this.nodeName.toLower()).cloneNode(true);
 
 		this.shadow = this.attachShadow({mode: 'open'});
-		
+
 		this.shadow.appendChild(this.template.content.cloneNode(true));
-		
+
 		return this;
 	}
 	makeKeys(keyboard) {
-		console.log("numericMAkeKeys")
 		this.container.innerHTML="";
 		keyboard.forEach((el, i) => {
 			let key = document.createElement('button');
@@ -1604,7 +1603,7 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 
 			key.textContent = el.label;
 			key.value = el.keyCode;
-			
+
 			key.classList.add("keiboard_key_"+el.keyCode);
 
 			if (!(
@@ -1613,10 +1612,8 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 				&& key.value == "ToggleNumeric" 
 			)) {
 				this.container.appendChild(key);
-			} else {
-				console.log('hidding '+key.value)
 			}
-		});		
+		});
 	}
 	connectedCallback() {
 		this.container = this.shadow.querySelector('.keypad_numpadContainer');
@@ -1634,7 +1631,8 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 		this.currentCase = "lower";
 
 		// NOTE: this might need toLower on non xhtml5 (regular html5) pages!!
-		this.template = document.getElementById(this.nodeName).cloneNode(true);
+//		this.template = document.getElementById(this.nodeName).cloneNode(true);
+		this.template = document.getElementById(this.nodeName.toLower()).cloneNode(true);
 
 		this.shadow = this.attachShadow({mode: 'open'});
 		
@@ -1748,7 +1746,8 @@ class KeiboardContainerElementClass extends HTMLElement {
 		this.self = self;
 
 		// NOTE: this might? need toLower on non xhtml5 (regular html5) pages!!
-		this.template = document.getElementById(this.nodeName).cloneNode(true);
+//		this.template = document.getElementById(this.nodeName).cloneNode(true);
+		this.template = document.getElementById(this.nodeName.toLower()).cloneNode(true);
 
 		this.shadow = this.attachShadow({mode: 'open'});		
 
