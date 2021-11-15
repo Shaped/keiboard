@@ -52,9 +52,10 @@ If you want to have just a numeric keyboard on a certain element:
 TODO:
 - make light theme work
 - make both themes better
-- make tests, examples
+- make tests, more examples
 - test integration with various layout styles
-- make easier way to add/change keyboard layout definitions
+- add option to add height of keyboard to page, so content can scroll if needed (due to the keyboard taking away from content space)
+- make easier way to add/change keyboard layout definitions, make them external json files
 - lots more, I said it was early :)
 
 (C) 2021 Shaped Technica (Jai B)
