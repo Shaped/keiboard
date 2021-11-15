@@ -1320,7 +1320,7 @@ class Keiboard {
 
 	focusHappened(ev) {
 		if (ev.target instanceof HTMLInputElement
-		|| ev.target instanceof HTMLSelectElement) {
+		|| ev.target instanceof HTMLTextAreaElement) {
 			if (this.options.inputClass != null
 			&&	ev.target.classList.contains(this.options.inputClass)
 			||  this.options.inputClass == null) {
@@ -1331,7 +1331,7 @@ class Keiboard {
 
 	blurHappened(ev) {
 		if (ev.target instanceof HTMLInputElement
-		|| ev.target instanceof HTMLSelectElement) {
+		|| ev.target instanceof HTMLTextAreaElement) {
 			if (this.options.inputClass != null
 			&&	ev.target.classList.contains(this.options.inputClass)
 			||  this.options.inputClass == null) {
