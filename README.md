@@ -8,6 +8,10 @@ Code is still very early but it is sort of functional.
 
 There are two main keyboard types, 'qwerty' and 'numpad'. 'qwerty' is based on a typical US layout. 'numpad' is mostly a generated layout for numeric entry.
 
+Example:
+
+https://codepen.io/forbiddenera-the-decoder/pen/VwzENdJ
+
 Usage:
 
 ```
