@@ -1,7 +1,6 @@
 /*
-
 	keiboard - onscreen keyboard yo
-	(C) 2021 Shaped Technica (Jai B)
+	(C) 2021 Shaped Technica (Jai B) || GPLv3 | Commercial License Available
 */
 
 class Keiboard {
@@ -11,28 +10,30 @@ class Keiboard {
 		  displaySpecialKeys = false,
 		  qwertyShowNumbers = true,
 		  singleKeySpread = true,
-		  shiftSingle = true
+		  shiftSingle = true,
+		  floating = false
 		} = {}) {
 
 		this.options = {
-			inputClass:inputClass,
-			theme:theme,
+			inputClass: inputClass,
+			theme: theme,
 			displaySpecialKeys: displaySpecialKeys,
 			qwertyShowNumbers: qwertyShowNumbers,
 			singleKeySpread: singleKeySpread,
-			shiftSingle: shiftSingle
+			shiftSingle: shiftSingle,
+			floating: floating
 		};
 
 		this.themes = {
 			'light' : {
-				baseThemeURI	: '/js/lib/keiboard/css/keiboard-light-base.css',
-				shadowThemeURI	: '/js/lib/keiboard/css/keiboard-light-shadow.css',
-				templateURI		: '/js/lib/keiboard/templates/keiboard-light.html'
+				baseThemeURI	: 'keiboard/css/keiboard-light-base.css',
+				shadowThemeURI	: 'keiboard/css/keiboard-light-shadow.css',
+				templateURI		: 'keiboard/templates/keiboard-light.html'
 			},
 			'dark' : {
-				baseThemeURI	: '/js/lib/keiboard/css/keiboard-dark-base.css',
-				shadowThemeURI	: '/js/lib/keiboard/css/keiboard-dark-shadow.css',
-				templateURI		: '/js/lib/keiboard/templates/keiboard-dark.html'
+				baseThemeURI	: 'keiboard/css/keiboard-dark-base.css',
+				shadowThemeURI	: 'keiboard/css/keiboard-dark-shadow.css',
+				templateURI		: 'keiboard/templates/keiboard-dark.html'
 			}
 		}
 
@@ -1371,6 +1372,12 @@ class KeiboardElementClass extends HTMLElement {
 		super(...args);
 		this.self = self;
 
+		this.template = document.getElementById(this.nodeName.toLowerCase()).cloneNode(true);
+
+		this.shadow = this.attachShadow({mode: 'open'});
+
+		this.shadow.appendChild(this.template.content.cloneNode(true));
+
 		return this;
 	}	
 	handleKeypress(ev) {
@@ -1400,6 +1407,22 @@ class KeiboardElementClass extends HTMLElement {
 					let enterUp = new KeyboardEvent('keyup', enterKey);
 
 					this.target.dispatchEvent(enterDown);
+
+					if (this.target instanceof HTMLTextAreaElement) {
+						if (this.target.selectionStart == 0
+						&& this.target.selectionEnd == 0
+						&& this.target.value.length == 0
+						|| this.target.selectionStart == this.target.value.length) {
+						    this.target.value += '\n';
+						} else {
+						    this.target.value = this.target.value.substring(0, startPos)
+						        + '\n'
+						        + this.target.value.substring(endPos, this.target.value.length);
+
+						    this.target.selectionStart = startPos+1;
+						    this.target.selectionEnd = startPos+1;
+						}
+					}
 
 					setTimeout(()=>{
 						this.target.dispatchEvent(enterUp);
@@ -1563,6 +1586,7 @@ class KeiboardElementClass extends HTMLElement {
 						});
 					}
 					// TODO: can we, even if 'untrusted', fake keypress/up/down events for all keys?
+					// meaning, can the browser respond to any events without us doing it ourselves?
 					if (this.target.selectionStart == 0
 					&& this.target.selectionEnd == 0
 					&& this.target.value.length == 0
@@ -1584,15 +1608,6 @@ class KeiboardElementClass extends HTMLElement {
 class KeiboardNumpadElementClass extends KeiboardElementClass {
 	constructor(...args) {
 		super(...args);
-		this.self = self;
-
-		// NOTE: this might need toLower on non xhtml5 (regular html5) pages!!
-//		this.template = document.getElementById(this.nodeName).cloneNode(true);
-		this.template = document.getElementById(this.nodeName.toLowerCase()).cloneNode(true);
-
-		this.shadow = this.attachShadow({mode: 'open'});
-
-		this.shadow.appendChild(this.template.content.cloneNode(true));
 
 		return this;
 	}
@@ -1628,18 +1643,9 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 class KeiboardQwertyElementClass extends KeiboardElementClass {
 	constructor(...args) {
 		super(...args);
-		this.self = self;
 
 		this.currentCase = "lower";
-
-		// NOTE: this might need toLower on non xhtml5 (regular html5) pages!!
-//		this.template = document.getElementById(this.nodeName).cloneNode(true);
-		this.template = document.getElementById(this.nodeName.toLowerCase()).cloneNode(true);
-
-		this.shadow = this.attachShadow({mode: 'open'});
-		
-		this.shadow.appendChild(this.template.content.cloneNode(true));
-		
+	
 		return this;
 	}
 	makeKeys(keyboard, keyCase) {
@@ -1742,16 +1748,9 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 	}
 }
 
-class KeiboardContainerElementClass extends HTMLElement {
+class KeiboardContainerElementClass extends KeiboardElementClass {
 	constructor(...args) {
 		super(...args);
-		this.self = self;
-
-		// NOTE: this might? need toLower on non xhtml5 (regular html5) pages!!
-//		this.template = document.getElementById(this.nodeName).cloneNode(true);
-		this.template = document.getElementById(this.nodeName.toLowerCase()).cloneNode(true);
-
-		this.shadow = this.attachShadow({mode: 'open'});		
 
 		return this;
 	}
