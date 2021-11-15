@@ -1190,6 +1190,7 @@ class Keiboard {
 
 		style.setAttribute('rel','stylesheet');
 		style.setAttribute('type','text/css');
+		style.setAttribute('crossorigin', 'anonymous');
 
 		style.setAttribute('href',this.themes[this.options.theme].baseThemeURI);
 
@@ -1223,6 +1224,7 @@ class Keiboard {
 
 			style.setAttribute('rel','stylesheet');
 			style.setAttribute('type','text/css');
+			style.setAttribute('crossorigin','anonymous');
 			style.setAttribute('href',_self.themes[_self.options.theme].shadowThemeURI);
 
 			el.content.prepend(style);
