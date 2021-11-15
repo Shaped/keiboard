@@ -209,7 +209,7 @@ class Keiboard {
 					label: "TAB",
 					keyCode: "Tab",
 					keyModifier: "Shift",
-					keyIsSpecial: true					
+					keyIsSpecial: true
 				},
 				keyLower:{
 					label: "TAB",
@@ -1176,9 +1176,9 @@ class Keiboard {
 					keyIsModifier: true,
 					keyIsSpecial: true
 				}
-			}			
+			}
 			]
-		];		
+		];
 
 		this.enabled = false;
 		this.isVisible = false;
@@ -1202,7 +1202,7 @@ class Keiboard {
 			customElements.define('keiboard-qwerty', KeiboardQwertyElementClass);
 		});
 
-		this.insertKeiboardIntoDocument();		
+		this.insertKeiboardIntoDocument();
 	}
 
 	async insertTemplatesIntoDocument() {
@@ -1213,12 +1213,12 @@ class Keiboard {
 		}
 
 		let html = await response.text();
-		
+
 		let parser = new DOMParser();
 		let doc = parser.parseFromString(html, 'text/html');
 
 		var _self = this;
-	
+
 		Array.from(doc.getElementsByTagName('template')).forEach((el, i) => {
 			let style = doc.createElement('link');
 
@@ -1243,9 +1243,9 @@ class Keiboard {
 
 		  this.focusHappenedEventBind = this.focusHappened.bind(this);
 		  this.blurHappenedEventBind = this.blurHappened.bind(this);
+
 		  window.addEventListener('focus', this.focusHappenedEventBind, true);
 		  window.addEventListener('blur', this.blurHappenedEventBind, true);
-
 	}
 
 	detachEvents() {
@@ -1319,7 +1319,8 @@ class Keiboard {
 	}
 
 	focusHappened(ev) {
-		if (ev.target instanceof HTMLInputElement) {
+		if (ev.target instanceof HTMLInputElement
+		|| ev.target instanceof HTMLSelectElement) {
 			if (this.options.inputClass != null
 			&&	ev.target.classList.contains(this.options.inputClass)
 			||  this.options.inputClass == null) {
@@ -1329,12 +1330,13 @@ class Keiboard {
 	}
 
 	blurHappened(ev) {
-		if (ev.target instanceof HTMLInputElement) {
+		if (ev.target instanceof HTMLInputElement
+		|| ev.target instanceof HTMLSelectElement) {
 			if (this.options.inputClass != null
 			&&	ev.target.classList.contains(this.options.inputClass)
 			||  this.options.inputClass == null) {
 				this.hideKeyboard();
-			}			
+			}
 		}
 	}
 
