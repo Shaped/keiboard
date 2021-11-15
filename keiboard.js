@@ -1183,7 +1183,6 @@ class Keiboard {
 		this.enabled = false;
 		this.isVisible = false;
 
-		this.initialize();
 	}
 
 	initialize () {
@@ -1338,6 +1337,7 @@ class Keiboard {
 	}
 
 	enableKeiboard() {
+		this.initialize();
 		this.enabled=true;
 		this.attachEvents();
 	}
