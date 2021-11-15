@@ -12,6 +12,9 @@ Example:
 
 https://codepen.io/forbiddenera-the-decoder/pen/VwzENdJ
 
+![Numeric Example](https://github.com/Shaped/keiboard/raw/main/keiboardnumeric.png)
+![QWERTY Example](https://github.com/Shaped/keiboard/raw/main/keiboardqwerty.png)
+
 Usage:
 
 ```
