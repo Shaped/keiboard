@@ -1586,7 +1586,7 @@ class KeiboardNumpadElementClass extends KeiboardElementClass {
 
 		// NOTE: this might need toLower on non xhtml5 (regular html5) pages!!
 //		this.template = document.getElementById(this.nodeName).cloneNode(true);
-		this.template = document.getElementById(this.nodeName.toLower()).cloneNode(true);
+		this.template = document.getElementById(this.nodeName.toLowerCase()).cloneNode(true);
 
 		this.shadow = this.attachShadow({mode: 'open'});
 
@@ -1632,7 +1632,7 @@ class KeiboardQwertyElementClass extends KeiboardElementClass {
 
 		// NOTE: this might need toLower on non xhtml5 (regular html5) pages!!
 //		this.template = document.getElementById(this.nodeName).cloneNode(true);
-		this.template = document.getElementById(this.nodeName.toLower()).cloneNode(true);
+		this.template = document.getElementById(this.nodeName.toLowerCase()).cloneNode(true);
 
 		this.shadow = this.attachShadow({mode: 'open'});
 		
@@ -1747,7 +1747,7 @@ class KeiboardContainerElementClass extends HTMLElement {
 
 		// NOTE: this might? need toLower on non xhtml5 (regular html5) pages!!
 //		this.template = document.getElementById(this.nodeName).cloneNode(true);
-		this.template = document.getElementById(this.nodeName.toLower()).cloneNode(true);
+		this.template = document.getElementById(this.nodeName.toLowerCase()).cloneNode(true);
 
 		this.shadow = this.attachShadow({mode: 'open'});		
 
