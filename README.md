@@ -1,21 +1,27 @@
-Needed an On Screen Keyboard for some Kiosk/tablet style projects.
+# keiboard.js
 
-Saw a few on web, didn't likey. kioskboard wouldn't work with my xhtml5-nesss. opened code to try and fix..and..well..
+## About
 
-Decided to make my own. Use as you wish HOWEVER it is GPLv3 so you have to share your code too. Otherwise, you can contact me for commercial licensing.
+Needed an On Screen Keyboard for some Kiosk/tablet style projects. Saw a few on web, didn't likey. kioskboard wouldn't work with my xhtml5-nesss. opened code to try and fix..and..well..Decided to make my own.
 
-Code is still very early but it is sort of functional.
+Use as you wish HOWEVER it is GPLv3 so you have to share your code too. Otherwise, you can contact me for commercial licensing.
+
+Code is still very early but it is functional. Uses custom elements & ES6.
 
 There are two main keyboard types, 'qwerty' and 'numpad'. 'qwerty' is based on a typical US layout. 'numpad' is mostly a generated layout for numeric entry.
 
-Example:
+Keyboard layouts are planned to be stored in external JS (JSON) files allowing for easy customization. It will be possible to customize every key on your layout.
+
+Keyboard themes and templates are already external and separate for easy customization.
+
+## Examples
 
 https://codepen.io/forbiddenera-the-decoder/pen/VwzENdJ
 
 ![Numeric Example](https://github.com/Shaped/keiboard/raw/main/keiboardnumeric.png)
 ![QWERTY Example](https://github.com/Shaped/keiboard/raw/main/keiboardqwerty.png)
 
-Usage:
+## Usage
 
 ```
 var keiboardOptions = {
@@ -36,8 +42,6 @@ When enabled, if the user focusses an input element, keiboard will display. Key 
 
 You can set which type of keyboard displays (qwerty or numeric) by adding a 'data-keiboard-type' attribute to your input element. By default, the QWERTY layout is shown.
 
-Example:
-
 ```
 <input type="text" data-keiboard-type="numeric" />
 ```
@@ -49,10 +53,11 @@ If you want to have just a numeric keyboard on a certain element:
 ```
 
 
-TODO:
+## TODO:
 - make light theme work
 - make both themes better
 - make tests, more examples
+- make a hide/minimize keyboard 'key' or button?
 - test integration with various layout styles
 - add option to add height of keyboard to page, so content can scroll if needed (due to the keyboard taking away from content space)
 - make easier way to add/change keyboard layout definitions, make them external json files
